@@ -1,0 +1,12 @@
+apiVersion: 1
+
+datasources:
+  - name: tigdb
+    type: influxdb
+    access: proxy
+    database: tig_db
+    user: tiguser
+    password: changeme
+    url: http://influxdb:8086
+    jsonData:
+      httpMode: POST

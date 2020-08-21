@@ -14,7 +14,6 @@ volumes:
 services:
   mongo:
     image: mongo:4.0 
-    container_name: "mongo"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=userchangeme
       - MONGO_INITDB_ROOT_PASSWORD=passwordchangeme
@@ -40,7 +39,6 @@ services:
     depends_on:
       - 'mongo'
     image: drumsergio/genieacs:local
-    container_name: "genieacs"
     environment:
       - GENIEACS_UI_JWT_SECRET=changeme
       - GENIEACS_MONGODB_CONNECTION_URL=mongodb://userchangeme:passwordchangeme@mongo:27017/genieacs?authSource=admin
@@ -119,6 +117,8 @@ services:
       - 3000:3000
     volumes:
       - grafana_data:/var/lib/grafana
+      - ./grafana/conf/defaults.ini:/usr/share/grafana/conf/defaults.ini
+      - ./grafana/conf/grafana/tigdb.yaml:/etc/grafana/provisioning/datasources/tigdb.yaml
     environment:
       - "GF_SECURITY_ADMIN_PASSWORD=changeme"
     privileged: false
